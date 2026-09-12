@@ -1,75 +1,83 @@
-# React + TypeScript + Vite
+# 🌱 Bhasha Shala
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### AI-Powered Mother-Tongue Learning Platform
 
-Currently, two official plugins are available:
+Bhasha Shala is an educational platform designed to help primary school children learn in their own mother tongue.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built for **Smart India Hackathon 2026 — SIH26042**.
 
-## React Compiler
+## 🎯 Problem
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Many children in India begin their education in a language that is different from the language they speak at home.
 
-## Expanding the ESLint configuration
+This can make early learning difficult, especially for children from regional and tribal language communities.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 💡 Solution
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Bhasha Shala provides teachers and students with a simple tablet-friendly learning platform that supports:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* 🌐 AI-powered educational translation
+* 🗣️ Voice-based learning
+* 📚 Mother-tongue lessons
+* 📝 Worksheets and quizzes
+* 🔊 Text-to-speech learning
+* 📱 Offline-friendly learning
+* 👩‍🏫 Teacher preparation tools
+* 🎒 Student learning activities
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🧠 Technology
 
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Progressive Web App (PWA)
+
+### Backend
+
+* Python
+* FastAPI
+* AI translation services
+
+### AI
+
+AI services are designed as replaceable adapters so the core education platform does not depend on a single AI provider.
+
+## 🏗️ Project Structure
+
+```text
+bhasha-shala/
+├── frontend/       # React + TypeScript application
+├── backend/        # FastAPI backend and AI services
+├── .gitignore
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Current Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* AI translation
+* Teacher learning content workflow
+* Voice services
+* Mother-tongue learning interface
+* Backend API integration
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🔮 Planned Features
 
-```
+* Interactive worksheets
+* AI-generated quizzes
+* Improved speech recognition
+* Text-to-speech learning
+* Offline lesson storage
+* Teacher dashboard
+* Student learning mode
+* More Indian regional and tribal languages
+
+## 🇮🇳 Vision
+
+To make quality primary education more accessible by allowing children to learn concepts through the language they understand best — their mother tongue.
+
+---
+
+**Built for inclusive education in India. 🇮🇳**

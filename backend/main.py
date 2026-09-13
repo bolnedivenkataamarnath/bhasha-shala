@@ -2,8 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from backend.services.translation_service import translation_service
-
+from services.translation_service import translation_service
 
 app = FastAPI(title="Bhasha Shala API")
 

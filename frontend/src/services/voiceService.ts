@@ -1,4 +1,21 @@
 export const voiceService = {
+  isVoiceEnabled(): boolean {
+    if (typeof localStorage === 'undefined') return true;
+    return localStorage.getItem('bhasha-shala-voice-on') !== 'false';
+  },
+
+  applySpeechSpeed(utterance: SpeechSynthesisUtterance): void {
+    if (typeof localStorage === 'undefined') return;
+    const speed = localStorage.getItem('bhasha-shala-speech-speed') || 'Normal';
+    if (speed === 'Slow') {
+      utterance.rate = 0.75;
+    } else if (speed === 'Fast') {
+      utterance.rate = 1.25;
+    } else {
+      utterance.rate = 1.0;
+    }
+  },
+
   getVoices(): Promise<SpeechSynthesisVoice[]> {
     return new Promise((resolve) => {
       if (!('speechSynthesis' in window)) {

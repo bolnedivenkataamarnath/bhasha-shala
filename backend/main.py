@@ -4,9 +4,11 @@ from pydantic import BaseModel
 
 from backend.services.translation_service import translation_service
 
+
 app = FastAPI(title="Bhasha Shala API")
 
 
+# Allow the React frontend to communicate with FastAPI
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -23,8 +25,8 @@ app.add_middleware(
 
 class TranslationRequest(BaseModel):
     text: str
-    source_lang: str = "en"
-    target_lang: str = "sat"
+    source_language: str = "English"
+    target_languages: list[str] = ["Santali"]
 
 
 @app.get("/")
@@ -37,15 +39,24 @@ def root():
 @app.post("/translate")
 def translate(request: TranslationRequest):
 
-    translated_text = translation_service.translate(
+    translations = translation_service.translate_multiple(
         request.text,
-        source_lang=request.source_lang,
-        target_lang=request.target_lang,
+        source_lang=request.source_language,
+        target_langs=request.target_languages,
     )
 
     return {
         "source_text": request.text,
-        "source_lang": request.source_lang,
-        "target_lang": request.target_lang,
-        "translated_text": translated_text,
+        "source_language": request.source_language,
+        "target_languages": request.target_languages,
+        "translations": translations,
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "backend.main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=False
+    )

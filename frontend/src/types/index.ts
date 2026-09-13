@@ -1,10 +1,8 @@
 export type NavTab =
   | 'dashboard'
   | 'translation'
-  | 'voice'
   | 'lessons'
-  | 'worksheets'
-  | 'quiz'
+  | 'student'
   | 'offline'
   | 'settings';
 

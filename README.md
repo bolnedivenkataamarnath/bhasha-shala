@@ -327,3 +327,28 @@ Built as a Smart India Hackathon project with a focus on:
 ---
 
 **Built for inclusive education in India. 🇮🇳**
+## 📸 Project Screenshots
+
+### 🏠 Dashboard
+
+![Bhasha Shala Dashboard](screenshots/dashboard.png)
+
+### 📚 Lessons & Learning
+
+![Lessons and Learning](screenshots/lessons.png)
+
+### 🌐 AI Translation
+
+![AI Translation](screenshots/translator.png)
+
+### 📝 Student Learning
+
+![Student learning](screenshots/studentlearning.png)
+
+### 📝 Offline Lessons
+![offline lessons](screenshots/offline.png)
+
+
+### ⚙️ Settings
+
+![Bhasha Shala Settings](screenshots/settings.png)

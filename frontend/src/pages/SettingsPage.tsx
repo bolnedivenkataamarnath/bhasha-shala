@@ -1,34 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Globe, Volume2, Palette, Check, Sparkles } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
+import type { AppLanguage, LearningLanguage, SpeechSpeed, ThemeMode, TextSize } from '../context/SettingsContext';
 
-const SUPPORTED_LANGUAGES = [
+const SUPPORTED_LANGUAGES: AppLanguage[] = [
   'English', 'Telugu', 'Hindi', 'Santali', 'Tamil',
   'Kannada', 'Malayalam', 'Bengali', 'Marathi', 'Odia', 'Assamese',
 ];
 
 export default function SettingsPage() {
-  const [appLang, setAppLang] = useState<string>(() => localStorage.getItem('bhasha-shala-app-lang') || 'English');
-  const [learningLang, setLearningLang] = useState<string>(() => localStorage.getItem('bhasha-shala-learning-lang') || 'Santali');
-  const [voiceOn, setVoiceOn] = useState<boolean>(() => localStorage.getItem('bhasha-shala-voice-on') !== 'false');
-  const [speechSpeed, setSpeechSpeed] = useState<string>(() => localStorage.getItem('bhasha-shala-speech-speed') || 'Normal');
-  const [theme, setTheme] = useState<string>(() => localStorage.getItem('bhasha-shala-theme') || 'Light');
-  const [textSize, setTextSize] = useState<string>(() => localStorage.getItem('bhasha-shala-text-size') || 'Normal');
-  const [savedMessage, setSavedMessage] = useState<string>('');
+  const {
+    appLang, setAppLang,
+    learningLang, setLearningLang,
+    voiceOn, setVoiceOn,
+    speechSpeed, setSpeechSpeed,
+    theme, setTheme,
+    textSize, setTextSize,
+  } = useSettings();
 
-  useEffect(() => { localStorage.setItem('bhasha-shala-app-lang', appLang); }, [appLang]);
-  useEffect(() => { localStorage.setItem('bhasha-shala-learning-lang', learningLang); }, [learningLang]);
-  useEffect(() => { localStorage.setItem('bhasha-shala-voice-on', String(voiceOn)); }, [voiceOn]);
-  useEffect(() => { localStorage.setItem('bhasha-shala-speech-speed', speechSpeed); }, [speechSpeed]);
-  useEffect(() => {
-    localStorage.setItem('bhasha-shala-theme', theme);
-    if (theme === 'Dark') document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
-  }, [theme]);
-  useEffect(() => {
-    localStorage.setItem('bhasha-shala-text-size', textSize);
-    if (textSize === 'Large') document.documentElement.style.fontSize = '18px';
-    else document.documentElement.style.fontSize = '16px';
-  }, [textSize]);
+  const [savedMessage, setSavedMessage] = useState<string>('');
 
   const showSavedNotification = (settingName: string) => {
     setSavedMessage(`${settingName} updated & saved successfully!`);
@@ -58,56 +48,57 @@ export default function SettingsPage() {
       )}
 
       {/* 1. LANGUAGE SETTINGS */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm">
-        <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6 shadow-sm">
+        <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="p-3 bg-indigo-50 text-indigo-700 rounded-2xl"><Globe className="w-6 h-6" /></div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900">Language Settings</h2>
-            <p className="text-xs text-slate-500 font-medium">Configure primary application language and default learning language</p>
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Language Settings</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Configure primary application language and default learning language</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 block">App Language</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block">App Language</label>
             <select
               value={appLang}
-              onChange={(e) => { setAppLang(e.target.value); showSavedNotification('App Language'); }}
-              className="w-full bg-slate-50 border-2 border-slate-200 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 outline-none transition-all cursor-pointer"
+              onChange={(e) => { setAppLang(e.target.value as AppLanguage); showSavedNotification('App Language'); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 dark:text-white outline-none transition-all cursor-pointer"
             >
               {SUPPORTED_LANGUAGES.map((lang) => (<option key={lang} value={lang}>{lang}</option>))}
             </select>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 block">Default Learning Language</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block">Default Learning Language</label>
             <select
               value={learningLang}
-              onChange={(e) => { setLearningLang(e.target.value); showSavedNotification('Default Learning Language'); }}
-              className="w-full bg-slate-50 border-2 border-slate-200 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 outline-none transition-all cursor-pointer"
+              onChange={(e) => { setLearningLang(e.target.value as LearningLanguage); showSavedNotification('Default Learning Language'); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 dark:text-white outline-none transition-all cursor-pointer"
             >
               {SUPPORTED_LANGUAGES.map((lang) => (<option key={lang} value={lang}>{lang}</option>))}
             </select>
           </div>
         </div>
       </div>
+
       {/* 2. VOICE & SPEECH */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm">
-        <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6 shadow-sm">
+        <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="p-3 bg-blue-50 text-blue-700 rounded-2xl"><Volume2 className="w-6 h-6" /></div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900">Voice & Speech</h2>
-            <p className="text-xs text-slate-500 font-medium">Manage text-to-speech audio toggle and playback speed</p>
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Voice & Speech</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Manage text-to-speech audio toggle and playback speed</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          <div className="flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div>
-              <span className="text-sm font-bold text-slate-800 block">Voice Audio</span>
-              <span className="text-xs text-slate-500">Enable text-to-speech narration</span>
+              <span className="text-sm font-bold text-slate-800 dark:text-white block">Voice Audio</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Enable text-to-speech narration</span>
             </div>
             <button
-              onClick={() => { setVoiceOn((prev) => !prev); showSavedNotification('Voice setting'); }}
+              onClick={() => { setVoiceOn(!voiceOn); showSavedNotification('Voice setting'); }}
               className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                voiceOn ? 'bg-indigo-600' : 'bg-slate-300'
+                voiceOn ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-600'
               }`}
             >
               <span
@@ -118,11 +109,11 @@ export default function SettingsPage() {
             </button>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 block">Speech Speed</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block">Speech Speed</label>
             <select
               value={speechSpeed}
-              onChange={(e) => { setSpeechSpeed(e.target.value); showSavedNotification('Speech Speed'); }}
-              className="w-full bg-slate-50 border-2 border-slate-200 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 outline-none transition-all cursor-pointer"
+              onChange={(e) => { setSpeechSpeed(e.target.value as SpeechSpeed); showSavedNotification('Speech Speed'); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 dark:text-white outline-none transition-all cursor-pointer"
             >
               <option value="Slow">Slow</option>
               <option value="Normal">Normal</option>
@@ -133,32 +124,33 @@ export default function SettingsPage() {
       </div>
 
       {/* 3. APPEARANCE */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm">
-        <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6 shadow-sm">
+        <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="p-3 bg-purple-50 text-purple-700 rounded-2xl"><Palette className="w-6 h-6" /></div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900">Appearance</h2>
-            <p className="text-xs text-slate-500 font-medium">Customize display theme and text size for readability</p>
+            <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">Appearance</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Customize display theme and text size for readability</p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 block">Theme</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block">Theme</label>
             <select
               value={theme}
-              onChange={(e) => { setTheme(e.target.value); showSavedNotification('Theme'); }}
-              className="w-full bg-slate-50 border-2 border-slate-200 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 outline-none transition-all cursor-pointer"
+              onChange={(e) => { setTheme(e.target.value as ThemeMode); showSavedNotification('Theme'); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 dark:text-white outline-none transition-all cursor-pointer"
             >
               <option value="Light">Light</option>
               <option value="Dark">Dark</option>
+              <option value="System">System</option>
             </select>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 block">Text Size</label>
+            <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block">Text Size</label>
             <select
               value={textSize}
-              onChange={(e) => { setTextSize(e.target.value); showSavedNotification('Text Size'); }}
-              className="w-full bg-slate-50 border-2 border-slate-200 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 outline-none transition-all cursor-pointer"
+              onChange={(e) => { setTextSize(e.target.value as TextSize); showSavedNotification('Text Size'); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-indigo-600 rounded-2xl px-4 py-3 font-semibold text-slate-800 dark:text-white outline-none transition-all cursor-pointer"
             >
               <option value="Normal">Normal</option>
               <option value="Large">Large</option>
@@ -169,4 +161,3 @@ export default function SettingsPage() {
     </div>
   );
 }
-

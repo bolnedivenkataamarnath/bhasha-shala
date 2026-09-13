@@ -2,7 +2,9 @@
 
 ### AI-Powered Mother-Tongue Learning Platform
 
-Bhasha Shala is a tablet-friendly educational platform designed to help primary school children learn concepts through their **mother tongue**.
+Bhasha Shala is a unified, tablet-friendly educational platform designed to help primary school children learn concepts through languages they understand best — their mother tongue.
+
+The platform combines **AI-powered translation, lessons, worksheets, quizzes, voice-based learning, and offline learning** in one place.
 
 Built for **Smart India Hackathon 2026 — SIH26042**.
 
@@ -12,79 +14,124 @@ Built for **Smart India Hackathon 2026 — SIH26042**.
 
 Many children in India begin their education in a language that is different from the language they speak at home.
 
-This can make early learning difficult, particularly for children from regional and tribal language communities.
+This language gap can make it difficult for young learners to understand concepts, participate confidently, and build strong foundations during primary education.
 
-Bhasha Shala aims to reduce this language barrier by combining **mother-tongue learning, multilingual translation, voice-based learning, and offline-friendly educational content** in one platform.
+This challenge is particularly important for children from **regional and tribal language communities**, where educational resources in their mother tongue may be limited.
 
 ---
 
 ## 💡 Solution
 
-Bhasha Shala provides a unified platform for teachers and students.
+**Bhasha Shala** provides a single unified learning platform where educational content can be prepared, translated, practiced, and learned through multiple Indian languages.
 
-### 👩‍🏫 Teacher Side
+Instead of separating the system into different teacher and student applications, Bhasha Shala brings the learning workflow together in one platform.
 
-Teachers can:
+The platform provides:
 
-* Create and manage learning content
-* Prepare lessons
-* Translate educational content into supported languages
-* Create worksheets
-* Create quizzes
-* Use voice and speech features
-* Prepare content for student learning
-
-### 🎒 Student Side
-
-Students can:
-
-* Learn through mother-tongue lessons
-* Read translated learning content
-* Complete worksheets
-* Attempt quizzes
-* Use voice-based learning features
-* Save lessons for offline access
-* Continue learning from previously saved lessons
+* 🌐 AI-powered multilingual educational translation
+* 📚 Lesson creation and learning
+* 📝 Interactive worksheets
+* 🧠 Quizzes and knowledge checks
+* 🗣️ Voice-based learning
+* 🔊 Text-to-speech support
+* 📱 Offline lesson storage
+* 🌍 Support for multiple Indian languages
+* ⚙️ Language, voice, and appearance settings
+* 💻 Tablet-friendly responsive interface
 
 ---
 
 ## 🚀 Key Features
 
-* 🌐 **AI-powered educational translation**
-* 📚 **Mother-tongue lesson library**
-* 📝 **Interactive worksheets**
-* 🧠 **Quizzes and learning activities**
-* 🗣️ **Voice and speech features**
-* 🔊 **Text-to-speech support**
-* 📱 **Offline lesson storage**
-* 🎒 **Dedicated student learning mode**
-* 👩‍🏫 **Teacher preparation workflow**
-* 🌍 **Multiple Indian language support**
-* ⚙️ **Language and accessibility settings**
-* 📲 **Tablet-friendly interface**
+### 📚 Lessons & Learning
+
+Users can access educational lessons through a simple learning interface designed for primary-school learners.
+
+Lessons can contain:
+
+* Learning content
+* Translated versions
+* Worksheets
+* Quizzes
+* Voice-based learning support
 
 ---
 
-## 🧠 AI Translation
+### 🌐 AI-Powered Translation
 
-Bhasha Shala uses an AI-powered translation service to convert educational content into supported Indian languages.
+Bhasha Shala integrates AI-powered translation to help convert educational content into Indian regional and tribal languages.
 
-The current translation backend uses:
+The platform supports multiple target languages and allows learners to access the translated version of educational content.
 
-**AI4Bharat IndicTrans2**
-
-This allows the platform to integrate AI translation while keeping the core education workflow independent from a single AI provider.
-
-AI services are designed as replaceable adapters so additional translation, speech, or AI models can be integrated in the future.
+The current translation system uses **AI4Bharat IndicTrans2** for English-to-Indic language translation.
 
 ---
 
-## 🏗️ Architecture
+### 📝 Worksheets
+
+Lessons can be accompanied by worksheets that allow students to practice concepts after learning them.
+
+Worksheets are integrated into the learning workflow instead of being treated as a separate application.
+
+---
+
+### 🧠 Quizzes
+
+Interactive quizzes help learners test their understanding of lesson content.
+
+The quiz workflow is connected directly with lessons and learning activities.
+
+---
+
+### 🗣️ Voice & Speech Learning
+
+Bhasha Shala includes voice-based learning capabilities to make educational content more accessible and engaging.
+
+The platform provides:
+
+* Voice controls
+* Speech-related learning features
+* Text-to-speech support
+* Adjustable speech speed
+
+---
+
+### 📱 Offline Learning
+
+Learning should not depend completely on an internet connection.
+
+Bhasha Shala allows lessons and their related learning content to be saved locally for offline access.
+
+Saved content can include:
+
+* Lessons
+* Translations
+* Worksheets
+* Quizzes
+
+This makes the platform more suitable for environments where internet connectivity may be limited or unreliable.
+
+---
+
+### ⚙️ Settings & Personalization
+
+The platform includes settings for:
+
+* Application language
+* Default learning language
+* Voice enable/disable
+* Speech speed
+* Light/Dark appearance
+* Normal/Large text
+
+---
+
+## 🏗️ System Architecture
 
 ```text
                     ┌─────────────────────────┐
                     │       Bhasha Shala      │
-                    │      Tablet Web App      │
+                    │    Unified Web Platform │
                     └────────────┬────────────┘
                                  │
                                  ▼
@@ -92,7 +139,9 @@ AI services are designed as replaceable adapters so additional translation, spee
                     │   React + TypeScript    │
                     │        Frontend          │
                     └────────────┬────────────┘
-                                 │ HTTPS / API
+                                 │
+                              API
+                                 │
                                  ▼
                     ┌─────────────────────────┐
                     │        FastAPI           │
@@ -101,16 +150,20 @@ AI services are designed as replaceable adapters so additional translation, spee
                                  │
               ┌──────────────────┼──────────────────┐
               ▼                  ▼                  ▼
-       Translation          Worksheets          Quiz
+       Translation          Worksheet            Quiz
          Service             Service            Service
               │
               ▼
        IndicTrans2 AI
 ```
 
+The frontend communicates with the FastAPI backend through API requests.
+
+AI services are designed as replaceable components so that the core educational platform does not depend permanently on a single AI provider.
+
 ---
 
-## 🛠️ Technology Stack
+## 🧠 Technology Stack
 
 ### Frontend
 
@@ -118,21 +171,27 @@ AI services are designed as replaceable adapters so additional translation, spee
 * TypeScript
 * Vite
 * Tailwind CSS
-* Progressive Web App architecture
+* Progressive Web App concepts
 * Browser Web Speech APIs
-* IndexedDB for offline lesson storage
+* IndexedDB for offline storage
 
 ### Backend
 
 * Python
 * FastAPI
 * REST API
-* AI translation services
 
-### AI
+### AI / NLP
 
 * AI4Bharat IndicTrans2
-* Modular AI service architecture
+* Multilingual translation
+* Indian language processing
+
+### Development
+
+* Git
+* GitHub
+* VS Code
 
 ---
 
@@ -142,13 +201,10 @@ AI services are designed as replaceable adapters so additional translation, spee
 bhasha-shala/
 │
 ├── frontend/
-│   ├── src/
-│   └── ...
+│   └── React + TypeScript application
 │
 ├── backend/
-│   ├── services/
-│   ├── main.py
-│   └── ...
+│   └── FastAPI backend and AI services
 │
 ├── .gitignore
 └── README.md
@@ -156,88 +212,97 @@ bhasha-shala/
 
 ---
 
-## ⚙️ Local Setup
+## 🌍 Supported Languages
 
-### 1. Clone the repository
+The platform is designed to work with multiple Indian languages, including:
 
-```bash
-git clone https://github.com/bolnedivenkataamarnath/bhasha-shala.git
-cd bhasha-shala
-```
+* 🇮🇳 English
+* తెలుగు Telugu
+* हिन्दी Hindi
+* Santali
+* தமிழ் Tamil
+* ಕನ್ನಡ Kannada
+* മലയാളം Malayalam
+* বাংলা Bengali
+* मराठी Marathi
+* ଓଡ଼ିଆ Odia
+* অসমীয়া Assamese
 
-### 2. Start the Backend
-
-Create and activate the Python environment, then install the backend dependencies.
-
-```bash
-python -m backend.main
-```
-
-The FastAPI backend runs at:
-
-```text
-http://127.0.0.1:8000
-```
-
-API documentation is available at:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-### 3. Start the Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The Vite development server will provide the local frontend URL.
+The architecture allows additional Indian languages to be integrated in the future.
 
 ---
 
-## 🌍 Supported Learning Languages
+## 🔄 Learning Workflow
 
-The platform is designed to support multiple Indian languages, including:
+```text
+        Educational Content
+                │
+                ▼
+        ┌─────────────────┐
+        │     Lessons     │
+        └────────┬────────┘
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ AI Translation  │
+        └────────┬────────┘
+                 │
+                 ▼
+       Mother-Tongue Content
+                 │
+        ┌────────┼────────┐
+        ▼        ▼        ▼
+    Worksheet   Quiz    Voice
+        │        │        │
+        └────────┼────────┘
+                 ▼
+          Student Learning
+                 │
+                 ▼
+          Save for Offline
+```
 
-* English
-* Telugu
-* Hindi
-* Santali
-* Tamil
-* Kannada
-* Malayalam
-* Bengali
-* Marathi
-* Odia
-* Assamese
+---
 
-Additional languages can be integrated through the language service architecture.
+## 📱 Unified Platform Approach
+
+Bhasha Shala is designed as **one integrated educational platform** rather than separate teacher and student applications.
+
+Different learning and content workflows exist within the same application.
+
+This approach helps keep the experience:
+
+* Simple
+* Consistent
+* Easy to use on tablets
+* Suitable for classroom environments
+* Easier to maintain and extend
 
 ---
 
 ## 🔮 Future Scope
 
-The platform can be extended with:
+The current platform provides the core learning workflow. Future improvements can include:
 
 * More Indian regional and tribal languages
-* Improved speech recognition for regional languages
-* Better multilingual AI models
-* Personalized learning paths
-* Student progress tracking
-* Teacher analytics
+* Improved speech recognition
 * More advanced AI-generated educational content
-* Native Android deployment
-* Expanded offline-first capabilities
+* Personalized learning recommendations
+* Better offline synchronization
+* Richer interactive learning activities
+* Educational analytics
+* More classroom-oriented workflows
+* Improved support for low-connectivity environments
 
 ---
 
 ## 🇮🇳 Vision
 
-Our vision is to make quality primary education more accessible by allowing children to learn concepts through the language they understand best — **their mother tongue**.
+Our vision is to make quality primary education more accessible by allowing children to understand and learn concepts through the language they are most comfortable with.
 
-Bhasha Shala aims to bridge the gap between **technology, education, and linguistic diversity** in India.
+**Language should not become a barrier to learning.**
+
+Bhasha Shala aims to bring technology, AI, and mother-tongue education together to create a more inclusive learning experience for children across India.
 
 ---
 
@@ -249,8 +314,16 @@ Bhasha Shala aims to bridge the gap between **technology, education, and linguis
 
 **Theme:** Smart Education
 
-**Project:** Bhasha Shala
+**Project:** Bhasha Shala — AI-Powered Mother-Tongue Learning Platform
 
 ---
 
-### Built for inclusive education in India. 🇮🇳
+## 👨‍💻 Project
+
+Built as a Smart India Hackathon project with a focus on:
+
+**AI + Indian Languages + Primary Education + Accessibility + Offline Learning**
+
+---
+
+**Built for inclusive education in India. 🇮🇳**
